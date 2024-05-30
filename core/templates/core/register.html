@@ -1,0 +1,284 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Register - Green The Land{% endblock %}
+
+{% block content %}
+<style>
+    /* Add this CSS to make the page non-scrollable */
+    html, body {
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    .form-container {
+        padding: 50px 100px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #343a40;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -15px;
+    }
+
+    .form-row .col-md-6,
+    .form-row .col-md-12 {
+        padding: 0 15px;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .form-control:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+    }
+
+    .btn-primary {
+        margin-top: 30px;
+        padding: 15px;
+        border: none;
+        border-radius: 20px;
+        background-color: #367536;
+        color: #ffffff;
+        font-size: 1em;
+        cursor: pointer;
+        width: 100%;
+        max-width: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-primary:hover {
+        background-color: #2e5f2d;
+    }
+
+    /* Existing styles */
+    .wp-block-audio figcaption {
+        margin-top: .5em;
+        margin-bottom: 1em;
+    }
+
+    .wp-block-audio audio {
+        width: 100%;
+        min-width: 300px;
+    }
+
+    .wp-block-button {
+        color: #fff;
+    }
+
+    .wp-block-button.aligncenter {
+        text-align: center;
+    }
+
+    .wp-block-button.alignright {
+        text-align: right;
+    }
+
+    .wp-block-button__link {
+        background-color: #32373c;
+        border: none;
+        border-radius: 28px;
+        box-shadow: none;
+        color: inherit;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 18px;
+        margin: 0;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        overflow-wrap: break-word;
+    }
+
+    .wp-block-button__link:active, .wp-block-button__link:focus, .wp-block-button__link:hover, .wp-block-button__link:visited {
+        color: inherit;
+    }
+
+    .is-style-squared .wp-block-button__link {
+        border-radius: 0;
+    }
+
+    .no-border-radius.wp-block-button__link {
+        border-radius: 0!important;
+    }
+
+    .is-style-outline {
+        color: #32373c;
+    }
+
+    .is-style-outline .wp-block-button__link {
+        background-color: transparent;
+        border: 2px solid;
+    }
+
+    .wp-block-calendar {
+        text-align: center;
+    }
+
+    .wp-block-calendar tbody td, .wp-block-calendar th {
+        padding: 4px;
+        border: 1px solid #e2e4e7;
+    }
+
+    .wp-block-calendar tfoot td {
+        border: none;
+    }
+
+    .wp-block-calendar table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+    }
+
+    .wp-block-calendar table th {
+        font-weight: 400;
+        background: #edeff0;
+    }
+
+    .wp-block-calendar a {
+        text-decoration: underline;
+    }
+
+    .wp-block-calendar tfoot a {
+        color: #00739c;
+    }
+
+    .wp-block-calendar table caption, .wp-block-calendar table tbody {
+        color: #40464d;
+    }
+
+    .wp-block-categories.alignleft {
+        margin-right: 2em;
+    }
+
+    .wp-block-categories.alignright {
+        margin-left: 2em;
+    }
+
+    .wp-block-columns {
+        display: flex;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+    }
+
+    @media (min-width: 782px) {
+        .wp-block-columns {
+            flex-wrap: nowrap;
+        }
+    }
+
+    .wp-block-column {
+        flex-grow: 1;
+        min-width: 0;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    @media (max-width: 599px) {
+        .wp-block-column {
+            flex-basis: 100%!important;
+        }
+    }
+
+    /* New styles for form cards */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f7f7f7;
+    }
+
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .card h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .card form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .card button {
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #367536;
+        color: #ffffff;
+        font-size: 1em;
+        cursor: pointer;
+        width: 100%;
+    }
+
+</style>
+<div class="form-container" id="signup-form">
+    <div class="card">
+      <h2>Sign Up</h2>
+      <form id="signup" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault01">First name</label>
+<input type="text" class="form-control" id="validationDefault01" name="first_name" placeholder="First name" required>
+</div>
+<div class="col-md-6 mb-3">
+<label for="validationDefault02">Last name</label>
+<input type="text" class="form-control" id="validationDefault02" name="last_name" placeholder="Last name" required>
+</div>
+</div>
+<div class="form-row">
+<div class="col-md-12 mb-3">
+<label for="validationDefaultEmail">Email</label>
+<input type="email" class="form-control" id="validationDefaultEmail" name="email" placeholder="Email" required>
+</div>
+</div>
+<div class="form-row">
+<div class="col-md-12 mb-3">
+<label for="validationDefaultPassword">Password</label>
+<input type="password" class="form-control" id="validationDefaultPassword" name="password" placeholder="Password" required>
+</div>
+</div>
+<button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+</div>
+</div>
+{% endblock %}
+

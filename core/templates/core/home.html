@@ -1,0 +1,122 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Home - Green The Land{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+    <main class="welcome-text">
+        <h1>Green Revolution</h1>
+        <h2>Join the movement! High school graduates planting trees in primary schools to fight climate change and educate 
+            the next generation on its devastating effects.</h2>
+        <a href="#join-section"><button class="join-button">Join Us</button></a>
+    </main>
+</div>
+
+<!-- Mission -->
+<div id="About" class="mission-content">
+    <div class="mission">
+        <div class="content">
+            <img src="{% static 'assets/mission2.jpg' %}" alt="students planting trees">
+            <main class="mission-text">
+                <h1>Our Mission</h1>
+                <p>Through our initiative, we aim to raise awareness about climate change and its devastating effects, while nurturing a sense of responsibility towards the planet in the younger generation.</p>
+                <p>At GreenTheLand, we're on a mission to empower high school graduates to make a tangible impact on the environment by planting trees in primary schools.</p>
+                <p>Join us in creating a greener future for all!</p>
+            </main>
+        </div>
+    </div>
+
+    <!-- Gallery -->
+    <div>
+        <h1 class="gallery">Photo Gallery</h1>
+    </div>
+    <div class="slideshow-container">
+        <!-- Slideshow images -->
+        {% for image in slideshow_images %}
+        <div class="slide">
+            <img src="{{ image.url }}" alt="Gallery Image {{ forloop.counter }}">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="faq-section">
+    <h1 class="faq-header">FAQ</h1>
+    {% for faq in faqs %}
+    <div class="faq-item">
+        <div class="faq-content">
+            <div class="question">{{ faq.question }}</div>
+            <div class="answer">{{ faq.answer }}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Initiative Section -->
+<section class="initiative-section">
+    <div class="initiative-content">
+        <img src="{% static 'assets/initiative.jpeg' %}" alt="Green the Land Initiative" class="initiative-image">
+        <div class="initiative-text">
+            <h2>Green the Land Initiative</h2>
+            <p>Join us in the mission to empower high school graduates to make a difference by planting trees in primary schools.</p>
+            <p>Our initiative not only advocates for climate change action but also educates the younger generation on the critical importance of preserving our planet.</p>
+            <p>Together, we can create a greener future for all!</p>
+        </div>
+    </div>
+</section>
+
+<!-- News Updates -->
+<h1 id="News-section" class="news-title">News Updates</h1>
+<div class="news-container">
+    {% for news in news_updates %}
+    <div class="news-card">
+        <img src="{{ news.image.url }}" alt="News Image {{ forloop.counter }}">
+        <div class="content">
+            <h2 class="news-title">{{ news.title }}</h2>
+            <p class="date">{{ news.date }}</p>
+            <p class="description">{{ news.description }}</p>
+            <button class="read-more-btn">Read More</button>
+            <div class="dropdown-content">
+                <p class="full-description">{{ news.full_description }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Stats -->
+<h1 class="stats-text">Stats</h1>
+<div class="stats-section">
+    <div class="stat">
+        <h2 class="stat-number">3,000+</h2>
+        <p class="stat-label">Trees Planted</p>
+    </div>
+    <div class="stat">
+        <h2 class="stat-number">150+</h2>
+        <p class="stat-label">High School Graduates Involved</p>
+    </div>
+    <div class="stat">
+        <h2 class="stat-number">2+</h2>
+        <p class="stat-label">Primary Schools Impacted</p>
+    </div>
+</div>
+
+<!-- NewsLetter -->
+<h2>Subscribe to our Newsletter</h2>
+    <form method="post" action="{% url 'home' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Subscribe</button>
+    </form>
+<!-- Contact -->
+<div id="Contacts" class="contact-section">
+    <h1>Contact Us</h1>
+    <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+        <p><i class="fas fa-phone"></i> Phone: <a href="tel:+123456789">+123456789</a></p>
+        <!-- <p><i class="fas fa-map-marker-alt"></i> Address: Your Address</p> -->
+    </div>
+</div>
+
+{% endblock %}
