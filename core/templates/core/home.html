@@ -8,7 +8,9 @@
         <h1>Green Revolution</h1>
         <h2>Join the movement! High school graduates planting trees in primary schools to fight climate change and educate 
             the next generation on its devastating effects.</h2>
-        <a href="#join-section"><button class="join-button">Join Us</button></a>
+        <!-- Existing code -->
+        <a href="{% url 'register' %}"><button class="join-button">Join Us</button></a>
+
     </main>
 </div>
 
@@ -104,11 +106,13 @@
 
 <!-- NewsLetter -->
 <h2>Subscribe to our Newsletter</h2>
-    <form method="post" action="{% url 'home' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Subscribe</button>
-    </form>
+<form method="post" action="{% url 'subscribe_newsletter' %}">
+    {% csrf_token %}
+    <!-- Add form fields for name and email if necessary -->
+    <input type="email" name="email" placeholder="Your Email" required>
+    <button type="submit">Subscribe</button>
+</form>
+
 <!-- Contact -->
 <div id="Contacts" class="contact-section">
     <h1>Contact Us</h1>
